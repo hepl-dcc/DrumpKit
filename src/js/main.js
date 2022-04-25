@@ -1,59 +1,59 @@
 (function () {
-  const DrumpKit = {
-    cacheDom() {
-      this.body = document.querySelector('body');
-      this.html = window.document.documentElement;
-      this.eAudios = new Map();
-      this.eKeys = new Map();
+    const DrumpKit = {
+        cacheDom() {
+            this.body = document.querySelector('body');
+            this.html = window.document.documentElement;
+            this.eAudios = new Map();
+            this.eKeys = new Map();
 
-      document.querySelectorAll('.key').forEach((eKey) => {
-        this.eKeys.set(eKey.dataset.key, eKey);
-      });
+            document.querySelectorAll('.key').forEach((eKey) => {
+                this.eKeys.set(eKey.dataset.key, eKey);
+            });
 
-      document.querySelectorAll('audio').forEach((eAudio) => {
-        this.eAudios.set(eAudio.dataset.key, eAudio);
-      })
-    },
+            document.querySelectorAll('audio').forEach((eAudio) => {
+                this.eAudios.set(eAudio.dataset.key, eAudio);
+            });
+        },
 
-    init() {
-      this.cacheDom();
-      this.html.classList.add('js-enabled');
-      this.addEventListener();
-    },
+        init() {
+            this.cacheDom();
+            this.html.classList.add('js-enabled');
+            this.addEventListener();
+        },
 
-    addEventListener() {
-      window.addEventListener('keydown', (evt) => {
-        this.keySymbol = evt.key;
-        this.playSound();
-        this.animateKey();
+        addEventListener() {
+            window.addEventListener('keydown', (evt) => {
+                this.keySymbol = evt.key;
+                this.playSound();
+                this.animateKey();
 
-      });
+            });
 
-      this.eKeys.forEach(function (eKey) {
-        eKey.addEventListener('transitionend', (elem) => {
-          elem.currentTarget.classList.remove('playing');
-        });
-      });
+            this.eKeys.forEach(function (eKey) {
+                eKey.addEventListener('transitionend', (elem) => {
+                    elem.currentTarget.classList.remove('playing');
+                });
+            });
 
-      this.body.addEventListener('transitionend', () => {
-        this.removeColorFromBody()
-      });
-    },
+            this.body.addEventListener('transitionend', () => {
+                this.removeColorFromBody();
+            });
+        },
 
-    removeColorFromBody() {
-      this.body.className = "";
-    },
+        removeColorFromBody() {
+            this.body.className = '';
+        },
 
-    playSound() {
-      // Pour remettre à 0 la lecture
-      this.eAudios.get(this.keySymbol).currentTime = 0;
-      this.eAudios.get(this.keySymbol).play();
-    },
+        playSound() {
+            // Pour remettre à 0 la lecture
+            this.eAudios.get(this.keySymbol).currentTime = 0;
+            this.eAudios.get(this.keySymbol).play();
+        },
 
-    animateKey() {
-      this.eKeys.get(this.keySymbol).classList.add('playing');
-      this.body.classList.add(this.keySymbol);
-    }
-  };
-  DrumpKit.init();
+        animateKey() {
+            this.eKeys.get(this.keySymbol).classList.add('playing');
+            this.body.classList.add(this.keySymbol);
+        }
+    };
+    DrumpKit.init();
 })();
