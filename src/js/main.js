@@ -46,13 +46,17 @@
 
         playSound() {
             // Pour remettre à 0 la lecture
-            this.eAudios.get(this.keySymbol).currentTime = 0.0;
-            this.eAudios.get(this.keySymbol).play();
+            if (this.eAudios.has(this.keySymbol)) {
+                this.eAudios.get(this.keySymbol).currentTime = 0.0;
+                this.eAudios.get(this.keySymbol).play();
+            }
         },
 
         animateKey() {
-            this.eKeys.get(this.keySymbol).classList.add('playing');
-            this.body.classList.add(this.keySymbol);
+            if (this.eAudios.has(this.keySymbol)) {
+                this.eKeys.get(this.keySymbol).classList.add('playing');
+                this.body.classList.add(this.keySymbol);
+            }
         }
     };
     DrumpKit.init();
