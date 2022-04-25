@@ -47,7 +47,8 @@
         playSound() {
             // Pour remettre à 0 la lecture
             if (this.eAudios.has(this.keySymbol)) {
-                this.eAudios.get(this.keySymbol).currentTime = 0.0;
+                this.eAudios.get(this.keySymbol).pause();
+                this.eAudios.get(this.keySymbol).currentTime = 0;
                 this.eAudios.get(this.keySymbol).play();
             }
         },
